@@ -1,0 +1,2 @@
+conda activate geospatial
+streamlit run app.py

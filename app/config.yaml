@@ -1,0 +1,30 @@
+credentials:
+  usernames:
+    dennis:
+      email: d.nguyen1@uu.nl
+      logged_in: False # Will be managed automatically
+      name: Dennis Nguyen
+      password: ichliebekroketten # Will be hashed automatically
+    erik:
+      email: erik.hekman@hu.nl
+      logged_in: False # Will be managed automatically
+      name: Erik Hekman
+      password: ikbengekopkroketjes # Will be hashed automatically
+    david:
+      email: d.gauthier@uu.nl
+      logged_in: False # Will be managed automatically
+      name: Erik Hekman
+      password: jadorelescroquettes # Will be hashed automatically
+    jelte:
+      email: j.vanboheemen@uu.nl
+      logged_in: False # Will be managed automatically
+      name: Jelte van Boheemen
+      password: ikbenookgekopkroketjes # Will be hashed automatically            
+cookie:
+  expiry_days: 30
+  key: some_signature_key # Must be string
+  name: some_cookie_name
+preauthorized:
+  emails:
+  - e.hekman@uu.nl
+
