@@ -12,12 +12,18 @@ def save_activities():
 
 # Function to handle an activity such as selecting an episode or a season
 def activity(id, activity):
+  
     # Creating a data dictionary with activity details
+    accessibility_prefs = st.session_state.get("accessibility", {})
+
     data = {
         'content_id': id,
         'activity': activity,
         'user_id': st.session_state['username'],
-        'datetime': str(datetime.datetime.now())  # Capturing the current datetime
+        'datetime': str(datetime.datetime.now()), # Capturing the current datetime
+        "accessibility_prefs": {
+            "captions": accessibility_prefs.get("captions", False),
+            "audio_descriptions": accessibility_prefs.get("audio_descriptions", False),    }
     }
     # Adding the activity to the session state
     if not st.session_state.get('activities'):
