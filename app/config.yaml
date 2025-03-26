@@ -1,25 +1,25 @@
 credentials:
   usernames:
-    dennis:
-      email: d.nguyen1@uu.nl
+    sueda:
+      email: sueda@uu.nl
       logged_in: False # Will be managed automatically
-      name: Dennis Nguyen
-      password: ichliebekroketten # Will be hashed automatically
-    erik:
-      email: erik.hekman@hu.nl
+      name: Sueda Zengin
+      password: $2a$12$V61BRcWOr3MSURy0w7PhdOf.eK8j3CUabdkDpJH2pnsjirqDwPol. # Will be hashed automatically
+    nil:
+      email: nil.mumcu@uu.nl
       logged_in: False # Will be managed automatically
-      name: Erik Hekman
-      password: ikbengekopkroketjes # Will be hashed automatically
-    david:
-      email: d.gauthier@uu.nl
+      name: Nil Mumcu
+      password: $2a$12$f3jwcvVFN7WVDdCUO.6NYuh6YzuktQ3pdKZEVc/Nzuce6/E.MVgr. # Will be hashed automatically
+    nelson:
+      email: nelson@uu.nl
       logged_in: False # Will be managed automatically
-      name: Erik Hekman
-      password: jadorelescroquettes # Will be hashed automatically
-    jelte:
-      email: j.vanboheemen@uu.nl
+      name: Nelson Durañona Sosa
+      password: $2a$12$FoI3fKNQYDFJKoehQtfoNuAZZ.h3CHKioS7TmcA52R4YiWGEyPTs6 # Will be hashed automatically
+    hector:
+      email: hector@uu.nl
       logged_in: False # Will be managed automatically
-      name: Jelte van Boheemen
-      password: ikbenookgekopkroketjes # Will be hashed automatically            
+      name: Hector Moreno Orjuela
+      password: $2a$12$4MQhyv51E1hmcPjaU3qWJuLxJ0zMwzXtXR5k/ElgAsxKiij3pCr0u # Will be hashed automatically            
 cookie:
   expiry_days: 30
   key: some_signature_key # Must be string
