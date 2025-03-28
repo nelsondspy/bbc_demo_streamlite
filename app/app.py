@@ -12,7 +12,7 @@ import transparency_tools  # For content-based recommendations + explanation
 
 import yaml  # YAML parser and emitter for Python
 from yaml.loader import SafeLoader  # Loader class for safe YAML loading
-
+import diversity_tools 
 # Configure the layout of the Streamlit page to use a wide format for more space
 st.set_page_config(layout="wide")
 
@@ -168,8 +168,12 @@ if st.session_state["authentication_status"]:
     t.preview_featured(featured)
 
 
-    st.subheader('A specific type of accesbility content')
-    #featured_station = recommendation_ds.get_accessible_recommendations('fake')
+    st.subheader('Diversity')
+
+    rh =  diversity_tools.recommend_higth(123)
+    print(rh)
+    t.preview_featured(rh)
+    
     #t.preview(featured_station)
 
 elif st.session_state["authentication_status"] is False:
