@@ -8,6 +8,7 @@ import evidence_ds as evidence_ds
 from recommendation_ds import df_catalog
 import streamlit_authenticator as stauth
 from template import mylist_curation_tools  # Import activity function from the other file
+import transparency_tools  # For content-based recommendations + explanation
 
 import yaml  # YAML parser and emitter for Python
 from yaml.loader import SafeLoader  # Loader class for safe YAML loading
@@ -15,10 +16,10 @@ from yaml.loader import SafeLoader  # Loader class for safe YAML loading
 # Configure the layout of the Streamlit page to use a wide format for more space
 st.set_page_config(layout="wide")
 
-st.image("../bbc_demo_streamlite/app/static/bbc_logo.jpg", width=150)  # Adjust width as needed
+st.image("static/bbc_logo.jpg", width=150)  # Adjust width as needed
 
 # Loading the configuration from a YAML file
-with open('app/config.yaml') as file:
+with open('config.yaml') as file:
     config = yaml.load(file, Loader=SafeLoader)
     
 # Initializing the authenticator with the configuration data
@@ -136,6 +137,28 @@ if st.session_state["authentication_status"]:
     # 🔹 Display Recommended Content
     st.title("Accessibility-Aware Recommendations")
     preview(df_catalog)
+
+    #transparency added
+
+    st.subheader("Content Recommender based on your interests")
+
+    user_input = st.text_input("Describe what you're interested in:")
+
+    if user_input:
+        results = transparency_tools.recommend_from_input(user_input, df_catalog)
+
+        show_scores = st.checkbox("Show similarity scores", value=False)
+
+
+        st.markdown("### Recommended for you:")
+        columns = st.columns(5)
+        items = results.to_dict(orient='records')
+        for column, item in zip(columns, items):
+            tile_item(column, item, st.session_state["user_preferences"])
+            if show_scores:
+               with column:
+                st.caption(f"Similarity Score: {round(item['similarity_score'], 3)}")
+
 
     st.subheader('BBC Content ')
 
