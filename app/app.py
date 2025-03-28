@@ -94,7 +94,6 @@ if st.session_state["authentication_status"]:
     # Function to display content with accessibility labels
     def tile_item(column, item, user_preferences):
         with column:
-            st.markdown(f"**{item.get('title', 'No Title')}** : {item.get('description', 'No Description')}")
             st.markdown(u"[![Foo]({})](/videoplay?id={})".format(item['image'], str(item['id'])  ))
             st.markdown(f"**{item['title']}** : {item['description']}")
 
@@ -129,7 +128,7 @@ if st.session_state["authentication_status"]:
 
         recommended_items = recommend_content(df_catalog, user_preferences)
 
-        columns = st.columns(5)
+        columns = st.columns(3)
         for column, item in zip(columns, recommended_items):
             tile_item(column, item, user_preferences)  # Pass the third argument here
 
