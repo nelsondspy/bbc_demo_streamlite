@@ -13,7 +13,9 @@ from os.path import join as pjoin
 
 from sklearn.preprocessing import MinMaxScaler
 
-DATA_DIR = '../data'
+import os
+DATA_DIR = os.path.join(os.path.dirname(__file__), '..', 'data')
+
 
 # Topic: Arts
 with open(pjoin(DATA_DIR,'arts.pkl') , 'rb') as file:

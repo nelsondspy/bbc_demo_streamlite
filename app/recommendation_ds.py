@@ -5,7 +5,10 @@ import streamlit as st
 
 
 # Load Dataset (Ensure the correct path to your dataset)
-df_catalog = pd.read_pickle('../data/bbc_full_dataset.pkl')
+import os
+base_path = os.path.dirname(__file__)
+file_path = os.path.join(base_path, '..', 'data', 'bbc_full_dataset.pkl')
+df_catalog = pd.read_pickle(file_path)
 
 if "captions" not in df_catalog.columns:
     df_catalog["captions"] = np.random.choice([True, False], len(df_catalog))

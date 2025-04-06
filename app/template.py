@@ -34,30 +34,53 @@ def activity(id, activity):
     save_activities()
 
 
-
 # set episode session state
 def select_item(isbn):
   st.session_state['id'] = isbn
   print('selected item:', isbn)
 
+def tile_item(column, item, user_preferences):
+    show_score = st.session_state.get("show_score", False)
 
-def tile_item(column, item):
-  with column:
-    #st.image(item['image'], use_container_width=True)
-    select_item(item['id'])
-    st.markdown(u"[![Foo]({})](/videoplay?id={})".format(item['image'], str(item['id'])  ))
+    with column:
+        st.markdown(u"[![Foo]({})](/videoplay?id={})".format(item['image'], str(item['id'])))
+        st.markdown(f"**{item['title']}** : {item['description']}")
 
-    st.markdown(f"**{item['title']}** : {item['description']}")
-    mylist_curation_tools(item)
+        if show_score and "similarity_score" in item:
+            st.caption(f"Similarity Score: {item['similarity_score']}%")
+
+        # Accessibility tags
+        accessibility_tags = []
+        if item.get("captions", False):
+            accessibility_tags.append("🔠 Captions")
+        if item.get("audio_description", False):
+            accessibility_tags.append("🎧 Audio Description")
+        if accessibility_tags:
+            st.markdown(f"**Accessibility:** {', '.join(accessibility_tags)}")
+
+        # User prefs match
+        preferences_match = []
+        if user_preferences["needs_captions"]:
+            preferences_match.append("🔠 Requires Captions")
+        if user_preferences["needs_audio_description"]:
+            preferences_match.append("🎧 Requires Audio Description")
+        st.markdown(f"**User's selected preferences:** {', '.join(preferences_match)}")
+
+        mylist_curation_tools(item)
 
 
 def tile_item_featured(column, item):
-  with column:
-    
-    #st.image(item['image'], use_container_width=True)
-    st.markdown(u"[![Foo]({})](/videoplay?id={})".format(item['image'], str(item['id'])  ))
-    st.markdown(f"**{item['title']}** : {item['description']}")
-    mylist_curation_tools(item)    
+    show_score = st.session_state.get("show_score", False)
+
+    with column:
+        st.markdown(u"[![Foo]({})](/videoplay?id={})".format(item['image'], str(item['id'])))
+        st.markdown(f"**{item['title']}** : {item['description']}")
+
+        if show_score and "similarity_score" in item:
+            st.caption(f"Similarity Score: {item['similarity_score']}%")
+
+        mylist_curation_tools(item)
+   
     
 
 def mylist_curation_tools(item):
@@ -73,7 +96,6 @@ def mylist_curation_tools(item):
         st.button('✖️', key=random(),type='tertiary', help='Not interested',  on_click=activity, args=(item['id'], 'black_listed' ))
    
 
-
 def preview(df):
   # check the number of items
   nbr_items = df.shape[0]
@@ -81,7 +103,6 @@ def preview(df):
     columns = st.columns(6)
     items = df.to_dict(orient='records')
     any(tile_item(x[0], x[1]) for x in zip(columns, items)) 
-
 
 def preview_featured(df):
   nbr_items = df.shape[0]
